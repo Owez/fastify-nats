@@ -7,7 +7,13 @@ const defaultServer = "nats://demo.nats.io:4222";
  * Custom configuration options for the plugin past the NATS connection options
  */
 export interface FastifyNatsOptions {
+    /**
+     * Uses the default demo NATS server over any other server provided
+     */
     defaultServer?: boolean
+    /**
+     * Drains the connection on exit instead of flushing and closing
+     */
     drainOnClose?: boolean
 }
 
@@ -34,7 +40,7 @@ type Options = FastifyNatsOptions & ConnectionOptions
  * @param opts Configuration options to use
  */
 export default async function fastifyNats(fastify: FastifyInstance, opts: Options) {
-    opts.servers = getServer(opts);
+    opts.servers = getServers(opts);
     await natsWrapper(fastify, opts);
 }
 
@@ -54,7 +60,8 @@ async function natsWrapper(fastify: FastifyInstance, opts: Options) {
     });
 }
 
-function getServer(opts: Options): string | string[] {
-    if (opts.defaultServer) return defaultServer;
+// NOTE: Only exported for testing
+export function getServers(opts: Options): string | string[] {
+    if (opts.defaultServer || opts.servers?.length == 0) return defaultServer;
     return opts.servers || defaultServer;
 }
