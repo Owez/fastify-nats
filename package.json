@@ -1,13 +1,15 @@
 {
   "name": "fastify-nats-ts",
-  "version": "0.1.0",
+  "version": "0.1.7",
   "description": "Modern fastify plugin for NATS",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest --passWithNoTests",
     "test:coverage": "npm run test -- --coverage",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "npm run lint -- --fix",
-    "build": "tsup"
+    "build": "tsup --dts"
   },
   "keywords": [],
   "author": "Owen Griffiths <root@ogriffiths.com>",
@@ -29,7 +31,9 @@
     "nats": "^2.19.0"
   },
   "tsup": {
-    "entry": ["src/index.ts"],
+    "entry": [
+      "src/index.ts"
+    ],
     "splitting": false,
     "sourcemap": true,
     "clean": true

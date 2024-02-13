@@ -1,7 +1,15 @@
 import { FastifyInstance } from "fastify";
-import nats, { ConnectionOptions, connect } from "nats";
+import nats, { ConnectionOptions, NatsConnection, connect } from "nats";
+import fp from "fastify-plugin";
 
 const defaultServer = "nats://demo.nats.io:4222";
+
+declare module "fastify" {
+    interface FastifyInstance {
+        nats: typeof nats,
+        nc: NatsConnection
+    }
+}
 
 /**
  * Custom configuration options for the plugin past the NATS connection options
@@ -39,7 +47,7 @@ type Options = FastifyNatsOptions & ConnectionOptions
  * @param fastify Fastify instance to use
  * @param opts Configuration options to use
  */
-export default async function fastifyNats(fastify: FastifyInstance, opts: Options) {
+async function fastifyNats(fastify: FastifyInstance, opts: Options) {
     opts.servers = getServers(opts);
     await natsWrapper(fastify, opts);
 }
@@ -65,3 +73,11 @@ export function getServers(opts: Options): string | string[] {
     if (opts.defaultServer || opts.servers?.length == 0) return defaultServer;
     return opts.servers || defaultServer;
 }
+
+export default fp(fastifyNats, {
+    name: "fastify-nats-ts",
+    fastify: "4.x",
+    decorators: {
+        fastify: ["nats", "nc"]
+    }
+})
