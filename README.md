@@ -16,7 +16,7 @@ You can then start using it inside of your app:
 
 ```ts
 import Fastify from "fastify";
-import fastifyNats from "fastify-nats";
+import fastifyNats from "fastify-nats-ts";
 
 const fastify = Fastify();
 await fastify.register(fastifyNats, { servers: "nats.example.com:4222" });
