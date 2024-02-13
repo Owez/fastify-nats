@@ -1,6 +1,6 @@
 {
   "name": "fastify-nats-ts",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Modern plugin for using a NATS client within Fastify",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

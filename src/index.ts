@@ -76,8 +76,5 @@ export function getServers(opts: Options): string | string[] {
 
 export default fp(fastifyNats, {
     name: "fastify-nats-ts",
-    fastify: "4.x",
-    decorators: {
-        fastify: ["nats", "nc"]
-    }
+    fastify: "4.x"
 })
