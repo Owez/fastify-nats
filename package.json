@@ -1,5 +1,5 @@
 {
-  "name": "fastify-nats",
+  "name": "fastify-nats-ts",
   "version": "0.1.0",
   "description": "Modern fastify plugin for NATS",
   "main": "src/index.ts",

@@ -9,7 +9,7 @@ This plugin is based upon the [nats.js](https://github.com/nats-io/nats.js) libr
 To install this plugin, simply install it via your package manager:
 
 ```shell
-npm i fastify-nats
+npm i fastify-nats-ts
 ```
 
 You can then start using it inside of your app:
